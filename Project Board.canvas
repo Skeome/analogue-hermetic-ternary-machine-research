@@ -4,8 +4,8 @@
 		{"id":"490d8df5cdcb425c","type":"file","file":"Thesis-Statement.md","x":-720,"y":-1280,"width":847,"height":880},
 		{"id":"c1676c7b0bf602d9","type":"file","file":"Research-Study.md","x":-766,"y":-2200,"width":943,"height":820},
 		{"id":"d09592c3eee27d9b","type":"file","file":"Ternary-Logic.md","x":-3120,"y":182,"width":1503,"height":741},
-		{"id":"a7badf4a315c3413","x":-1520,"y":182,"width":2447,"height":741,"type":"file","file":"Ternary-Logic-Binary-Transistors.md"},
-		{"id":"4816f41cf523c29b","x":1020,"y":182,"width":1523,"height":741,"type":"file","file":"Ternary-Transistors-Ambipolar-Materials.md"},
+		{"id":"a7badf4a315c3413","type":"file","file":"Ternary-Logic-Binary-Transistors.md","x":-1520,"y":182,"width":2447,"height":741},
+		{"id":"4816f41cf523c29b","type":"file","file":"Ternary-Transistors-Ambipolar-Materials.md","x":1020,"y":182,"width":1523,"height":741},
 		{"id":"db168c197ff56ca4","type":"file","file":"Experimental-Protocol.md","x":-3120,"y":-1280,"width":1503,"height":1325},
 		{"id":"9b18abdd6aea287c","type":"file","file":"Computational-Model.md","x":1040,"y":-1280,"width":1503,"height":1325}
 	],
