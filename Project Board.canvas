@@ -1,0 +1,31 @@
+{
+	"nodes":[
+		{"id":"825508d4e1a573a5","type":"file","file":"output/Figure_1.png","x":-720,"y":-361,"width":847,"height":406},
+		{"id":"490d8df5cdcb425c","type":"file","file":"Thesis-Statement.md","x":-720,"y":-1280,"width":847,"height":880},
+		{"id":"c1676c7b0bf602d9","type":"file","file":"Research-Study.md","x":-766,"y":-2200,"width":943,"height":820},
+		{"id":"d09592c3eee27d9b","type":"file","file":"Ternary-Logic.md","x":-3120,"y":182,"width":1503,"height":741},
+		{"id":"a7badf4a315c3413","x":-1520,"y":182,"width":2447,"height":741,"type":"file","file":"Ternary-Logic-Binary-Transistors.md"},
+		{"id":"4816f41cf523c29b","x":1020,"y":182,"width":1523,"height":741,"type":"file","file":"Ternary-Transistors-Ambipolar-Materials.md"},
+		{"id":"db168c197ff56ca4","type":"file","file":"Experimental-Protocol.md","x":-3120,"y":-1280,"width":1503,"height":1325},
+		{"id":"9b18abdd6aea287c","type":"file","file":"Computational-Model.md","x":1040,"y":-1280,"width":1503,"height":1325}
+	],
+	"edges":[
+		{"id":"3ee2b56f5e867554","fromNode":"c1676c7b0bf602d9","fromSide":"bottom","toNode":"490d8df5cdcb425c","toSide":"top"},
+		{"id":"2c5904a6edaa0ffa","fromNode":"490d8df5cdcb425c","fromSide":"left","toNode":"db168c197ff56ca4","toSide":"right"},
+		{"id":"e18bb38cc9dd7356","fromNode":"9b18abdd6aea287c","fromSide":"bottom","toNode":"d09592c3eee27d9b","toSide":"top"},
+		{"id":"b8e0f0df3270be77","fromNode":"9b18abdd6aea287c","fromSide":"bottom","toNode":"a7badf4a315c3413","toSide":"top"},
+		{"id":"e83fb35906d8a757","fromNode":"9b18abdd6aea287c","fromSide":"bottom","toNode":"4816f41cf523c29b","toSide":"top"},
+		{"id":"5750abe7f0f5b5b5","fromNode":"d09592c3eee27d9b","fromSide":"right","toNode":"a7badf4a315c3413","toSide":"left"},
+		{"id":"b324616f72e00a07","fromNode":"d09592c3eee27d9b","fromSide":"bottom","toNode":"4816f41cf523c29b","toSide":"bottom"},
+		{"id":"3fadb5b30280bb39","fromNode":"c1676c7b0bf602d9","fromSide":"bottom","toNode":"db168c197ff56ca4","toSide":"top"},
+		{"id":"178eb08164200a7b","fromNode":"c1676c7b0bf602d9","fromSide":"bottom","toNode":"9b18abdd6aea287c","toSide":"top"},
+		{"id":"b602ba85f1137e5e","fromNode":"a7badf4a315c3413","fromSide":"right","toNode":"4816f41cf523c29b","toSide":"left"},
+		{"id":"d973bbfec12273f7","fromNode":"490d8df5cdcb425c","fromSide":"right","toNode":"9b18abdd6aea287c","toSide":"left"},
+		{"id":"fa716d11c566f174","fromNode":"490d8df5cdcb425c","fromSide":"bottom","toNode":"825508d4e1a573a5","toSide":"top"},
+		{"id":"7210a517093be21d","fromNode":"db168c197ff56ca4","fromSide":"right","toNode":"825508d4e1a573a5","toSide":"left"},
+		{"id":"04fd9e3e2b3cf247","fromNode":"9b18abdd6aea287c","fromSide":"left","toNode":"825508d4e1a573a5","toSide":"right"},
+		{"id":"461f6132d5d01b2a","fromNode":"d09592c3eee27d9b","fromSide":"top","toNode":"825508d4e1a573a5","toSide":"bottom"},
+		{"id":"fd7c90126b30c1d7","fromNode":"a7badf4a315c3413","fromSide":"top","toNode":"825508d4e1a573a5","toSide":"bottom"},
+		{"id":"b7170a08fd426e3a","fromNode":"4816f41cf523c29b","fromSide":"top","toNode":"825508d4e1a573a5","toSide":"bottom"}
+	]
+}

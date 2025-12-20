@@ -1,0 +1,12 @@
+**`Library/IGF/N001_Basic_Tinture_v4.pdf` (`Inner Garden Alchemy I: Lesson 1 - Basic Tincture`)**:
+    *   **Relevance:** This document provides the first practical, hands-on application of the alchemical theory presented in the introductory lesson. It guides the student through the creation of a basic spagyric tincture, demonstrating how the philosophical principles of the `Tria Prima` are manipulated in a laboratory setting. This process is foundational to the Unified Hermetic Framework's exploration of applied esoterics and the creation of "vibrational medicines."
+    *   **Key Contributions:**
+        *   **The Spagyric Method in Practice:** The lesson details the five core operations for creating an enhanced medicinal tincture:
+            1.  **Solution:** The herb's essential oils (`Sulfur`) are dissolved into alcohol (`Mercury`).
+            2.  **Maceration:** The mixture is digested for a "philosophical month" to ensure full extraction.
+            3.  **Separation:** The liquid tincture is filtered from the solid plant matter.
+            4.  **Purification:** The leftover plant matter (the `Caput Mortuum`) is calcined (burned to a white ash) to purify the mineral salts (`Salt`).
+            5.  **Cohobation:** The purified `Salt` is dissolved back into the tincture, "marrying" the three separated principles (`Sulfur`, `Mercury`, and `Salt`) into a new, more potent and complete entity.
+        *   **Bridge between Philosophy and Practice:** This lesson makes the abstract concepts of the `Tria Prima` tangible. The `Sulfur` is the plant's oil/tincture, the `Mercury` is the alcohol solvent, and the `Salt` is the purified mineral ash. This practical application is a microcosm of the grand cosmological cycles described in more advanced alchemical texts.
+        *   **Energetic vs. Material Medicine:** The document distinguishes spagyric tinctures from standard herbal extracts by emphasizing that the final product contains the *entire being* of the plant—its body (`Salt`), spirit (`Mercury`), and soul (`Sulfur`). This creates a medicine that works on a "vibrational signature" and can affect the "psychic body," aligning directly with the project's interest in subtle energy, biophysics, and the technology of consciousness.
+        *   **Foundational Technique:** The `Solve et Coagula` (Dissolve and Coagulate) process demonstrated here—separating the principles and recombining them in a purified state—is the fundamental building block of all alchemical work, from simple tinctures to the Great Work itself.

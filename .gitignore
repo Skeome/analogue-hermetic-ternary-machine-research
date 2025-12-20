@@ -1,0 +1,13 @@
+# Ignoring Python cache directories
+__pycache__/
+# Ignoring Python virtual environments
+venv/
+# Ignoring Obsidian configuration and data
+.obsidian/
+# Ignoring GEMINI.md (Agent Context)
+GEMINI.md
+# Ignoring output files
+output/
+#Ignoring NDA affected Files
+/Library/BOTA/
+/Library/IGF/N*

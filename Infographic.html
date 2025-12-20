@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ternary Project: Radionics & Psionics Research</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Plotly.js -->
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+    <!-- Palette Choice: Cybernetic Neon (Deep Slate, Cyan, Violet, Pink) -->
+    <!-- Represents the fusion of Technology (Cyan) and Esoteric/Spiritual (Violet/Pink) -->
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'cyber-dark': '#0f172a', // Slate 900
+                        'cyber-card': '#1e293b', // Slate 800
+                        'cyber-text': '#f1f5f9', // Slate 100
+                        'cyber-accent-1': '#22d3ee', // Cyan 400
+                        'cyber-accent-2': '#a78bfa', // Violet 400
+                        'cyber-accent-3': '#f472b6', // Pink 400
+                        'cyber-muted': '#94a3b8', // Slate 400
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #0f172a;
+            color: #f1f5f9;
+        }
+        
+        /* Chart Container Styling - MANDATORY */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px; /* Base height */
+            max-height: 400px;
+        }
+
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+
+        /* Flow Diagram Styling */
+        .flow-step {
+            position: relative;
+            z-index: 10;
+        }
+        
+        .flow-connector {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(to bottom, #22d3ee, #a78bfa);
+            z-index: 0;
+        }
+
+        @media (min-width: 768px) {
+            .flow-connector {
+                width: 100%;
+                height: 2px;
+                top: 50%;
+                left: 0;
+                transform: translateY(-50%);
+                background: linear-gradient(to right, #22d3ee, #a78bfa);
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #475569; 
+        }
+    </style>
+</head>
+<body class="antialiased font-sans">
+
+    <!-- Header Section -->
+    <header class="py-12 px-6 text-center bg-gradient-to-b from-slate-900 to-slate-800 border-b border-slate-700 shadow-lg">
+        <h1 class="text-4xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-cyber-accent-1 via-cyber-accent-2 to-cyber-accent-3 mb-4">
+            TERNARY PROJECT
+        </h1>
+        <h2 class="text-xl md:text-2xl text-cyber-muted font-light tracking-wide max-w-3xl mx-auto">
+            Radionics & Psionics Research Initiative
+        </h2>
+        <p class="mt-6 text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed">
+            Investigating the synthesis of alchemical principles, quantum mechanics, and radionics to engineer a prototype for non-invasive healing and consciousness interfacing.
+        </p>
+    </header>
+
+    <main class="container mx-auto px-4 py-12 space-y-20">
+
+        <!-- SECTION 1: THE ALCHEMICAL TRINITY -->
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div class="order-2 md:order-1">
+                <div class="bg-cyber-card p-6 rounded-2xl shadow-xl border border-slate-700">
+                    <h3 class="text-2xl font-bold text-cyber-accent-1 mb-2">The Metaphysical Core</h3>
+                    <p class="text-slate-300 mb-6 text-sm">
+                        The "Ternary Machine" is conceptually grounded in the Three Primes of Alchemy. Unlike binary systems (0/1), this system operates on a trinary logic structure: Soul (Sulfur), Spirit (Mercury), and Body (Salt). This balance is critical for bridging the gap between subtle energy (Chi/Qi) and physical matter.
+                    </p>
+                    <div class="chart-container">
+                        <canvas id="ternaryChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="order-1 md:order-2 space-y-6">
+                <h3 class="text-3xl font-bold text-white border-l-4 border-cyber-accent-3 pl-4">
+                    The Three Principles
+                </h3>
+                <p class="text-slate-300">
+                    Research indicates that a functional radionics device must mimic the energetic constitution of life itself. The prototype will be designed to process three distinct signal types simultaneously.
+                </p>
+                <div class="grid grid-cols-1 gap-4">
+                    <div class="bg-slate-800 p-4 rounded-lg border-l-4 border-yellow-500">
+                        <strong class="text-yellow-400 block text-lg">Sulfur (Soul)</strong>
+                        <span class="text-slate-400 text-sm">The animating principle. In the machine, this represents the "Input Intent" or the Psionic Operator's consciousness.</span>
+                    </div>
+                    <div class="bg-slate-800 p-4 rounded-lg border-l-4 border-cyan-500">
+                        <strong class="text-cyan-400 block text-lg">Mercury (Spirit)</strong>
+                        <span class="text-slate-400 text-sm">The fluid mediator. Correlates to the "Transmission Medium" or the scalar wave carrier frequencies.</span>
+                    </div>
+                    <div class="bg-slate-800 p-4 rounded-lg border-l-4 border-pink-500">
+                        <strong class="text-pink-400 block text-lg">Salt (Body)</strong>
+                        <span class="text-slate-400 text-sm">The fixative. The physical hardware, circuits, and the "Output Target" (Witness).</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: THEORETICAL FEASIBILITY -->
+        <section class="bg-cyber-card rounded-3xl p-8 shadow-2xl border border-slate-700">
+            <div class="text-center max-w-3xl mx-auto mb-10">
+                <h3 class="text-3xl font-bold text-white mb-4">Bridging Esotericism & Physics</h3>
+                <p class="text-slate-300">
+                    Can we build it? Step 4 of the research plan requires validating esoteric concepts against modern physics. This radar chart visualizes the theoretical overlap between traditional Radionics and Quantum Mechanics principles, highlighting where the "Ternary Machine" finds its scientific footing.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="chart-container">
+                    <canvas id="feasibilityChart"></canvas>
+                </div>
+                <div class="flex flex-col justify-center space-y-6">
+                    <div class="bg-slate-900/50 p-6 rounded-xl border border-slate-700">
+                        <h4 class="text-xl font-semibold text-cyber-accent-2 mb-2">Quantum Entanglement</h4>
+                        <p class="text-sm text-slate-400">
+                            Strong scientific support exists for "action at a distance" (entanglement), which provides a plausible mechanism for how radionics might affect a remote target (Witness) without physical contact.
+                        </p>
+                    </div>
+                    <div class="bg-slate-900/50 p-6 rounded-xl border border-slate-700">
+                        <h4 class="text-xl font-semibold text-cyber-accent-2 mb-2">Wave-Particle Duality</h4>
+                        <p class="text-sm text-slate-400">
+                            The observer effect in quantum mechanics suggests consciousness affects matter. This aligns with the "Psionic" input requirement of the machine.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: MACHINE ARCHITECTURE (CSS DIAGRAM) -->
+        <section>
+            <div class="mb-10 text-center">
+                <h3 class="text-3xl font-bold text-white">Prototype Architecture</h3>
+                <p class="text-cyber-muted mt-2">Synthesizing the Functional Components (Research Step 7)</p>
+            </div>
+
+            <div class="relative max-w-5xl mx-auto py-12">
+                <!-- Connector Line -->
+                <div class="flow-connector"></div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-12 relative z-10">
+                    
+                    <!-- INPUT -->
+                    <div class="bg-slate-900 border-2 border-cyber-accent-1 p-6 rounded-xl shadow-[0_0_20px_rgba(34,211,238,0.2)] text-center transform hover:scale-105 transition-transform duration-300">
+                        <div class="text-4xl mb-4">📡</div>
+                        <h4 class="text-xl font-bold text-cyber-accent-1 mb-2">1. Input / Tuning</h4>
+                        <p class="text-xs text-slate-400 uppercase tracking-widest mb-3">The Mercury Function</p>
+                        <p class="text-sm text-slate-300">
+                            Variable Capacitor/Inductor banks tuned to specific "rates". Interfaces with operator intent via Psionic plate.
+                        </p>
+                    </div>
+
+                    <!-- POWER -->
+                    <div class="bg-slate-900 border-2 border-cyber-accent-2 p-6 rounded-xl shadow-[0_0_20px_rgba(167,139,250,0.2)] text-center transform hover:scale-105 transition-transform duration-300">
+                        <div class="text-4xl mb-4">⚛️</div>
+                        <h4 class="text-xl font-bold text-cyber-accent-2 mb-2">2. Power / Resonance</h4>
+                        <p class="text-xs text-slate-400 uppercase tracking-widest mb-3">The Sulfur Function</p>
+                        <p class="text-sm text-slate-300">
+                            Scalar Wave Generator or Crystal Resonance Chamber. Amplifies the subtle signal without electromagnetic interference.
+                        </p>
+                    </div>
+
+                    <!-- OUTPUT -->
+                    <div class="bg-slate-900 border-2 border-cyber-accent-3 p-6 rounded-xl shadow-[0_0_20px_rgba(244,114,182,0.2)] text-center transform hover:scale-105 transition-transform duration-300">
+                        <div class="text-4xl mb-4">🎯</div>
+                        <h4 class="text-xl font-bold text-cyber-accent-3 mb-2">3. Output / Interface</h4>
+                        <p class="text-xs text-slate-400 uppercase tracking-widest mb-3">The Salt Function</p>
+                        <p class="text-sm text-slate-300">
+                            Witness Well (DNA Sample) or Holographic Projector. Directs the corrected information pattern to the target.
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: INNOVATIVE HEALING MODALITIES -->
+        <section class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start bg-slate-800/30 p-8 rounded-3xl">
+            <div>
+                <h3 class="text-3xl font-bold text-white mb-6">Healing Innovations</h3>
+                <p class="text-slate-300 mb-6 leading-relaxed">
+                    Research Step 6 contrasts traditional methods with innovative, frequency-based techniques. We aim to move beyond simple meridian tapping (EFT) toward direct "Biorelativity" and "Holographic" interventions. The goal is to maximize healing potential while minimizing physical invasiveness.
+                </p>
+                <div class="space-y-4">
+                    <div class="flex items-start">
+                        <span class="text-2xl mr-3">🧬</span>
+                        <div>
+                            <strong class="text-cyber-accent-1">DNA Alteration:</strong>
+                            <p class="text-sm text-slate-400">Using specific frequencies (e.g., Solfeggio) to encourage repair at a cellular level, referencing "The Code to the Matrix".</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <span class="text-2xl mr-3">🌌</span>
+                        <div>
+                            <strong class="text-cyber-accent-2">Holographic Chambers:</strong>
+                            <p class="text-sm text-slate-400">Projecting a "healed" morphogenic field onto the patient, allowing the physical body to realign with its perfect template.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="w-full">
+                <div class="chart-container">
+                    <canvas id="modalitiesChart"></canvas>
+                </div>
+                <p class="text-center text-xs text-slate-500 mt-4">
+                    Comparison of Innovation Potential vs. Implementation Complexity
+                </p>
+            </div>
+        </section>
+
+        <!-- SECTION 5: CONSCIOUSNESS INTERFACE (Plotly) -->
+        <section class="py-12">
+            <div class="text-center mb-8">
+                <h3 class="text-3xl font-bold text-white">The Orion Interface: Probability Viewing</h3>
+                <p class="text-cyber-muted max-w-2xl mx-auto mt-2">
+                    Research Step 5 explores "Project Looking Glass" and "The Orion Cube". The ultimate goal of the Ternary Machine is to interface with consciousness to view and potentially select optimal timelines.
+                </p>
+            </div>
+            
+            <div class="bg-slate-900 rounded-2xl p-4 border border-slate-700 shadow-2xl">
+                <!-- Plotly Container -->
+                <div id="plotlyDiv" style="width:100%; height:500px;"></div>
+                <div class="text-center mt-4 px-4 pb-4">
+                    <p class="text-sm text-slate-400 italic">
+                        Visualization: A 3D representation of a "Probability Cloud". Each point represents a potential future timeline. The "Ternary Machine" aims to navigate this field using Psionic focus.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONCLUSION FOOTER -->
+        <footer class="text-center pt-20 pb-12 border-t border-slate-800">
+            <h4 class="text-2xl font-bold text-white mb-4">Research Phase 1 Complete</h4>
+            <p class="text-slate-400 max-w-md mx-auto mb-8">
+                The theoretical framework for the Ternary Machine is established. By synthesizing the Alchemical Primes with Quantum Mechanics, we pave the way for a prototype that heals not just the body, but the probability field of the individual.
+            </p>
+            <div class="flex justify-center space-x-4">
+                <span class="px-4 py-2 bg-slate-800 rounded-full text-xs text-cyber-accent-1 border border-cyber-accent-1">Radionics</span>
+                <span class="px-4 py-2 bg-slate-800 rounded-full text-xs text-cyber-accent-2 border border-cyber-accent-2">Psionics</span>
+                <span class="px-4 py-2 bg-slate-800 rounded-full text-xs text-cyber-accent-3 border border-cyber-accent-3">Quantum Mechanics</span>
+            </div>
+        </footer>
+
+    </main>
+
+    <!-- CHART GENERATION SCRIPT -->
+    <script>
+        // --- UTILITY: Label Wrapper for Chart.js ---
+        function wrapLabels(label) {
+            if (typeof label !== 'string' || label.length <= 16) return label;
+            const words = label.split(' ');
+            const lines = [];
+            let currentLine = words[0];
+
+            for (let i = 1; i < words.length; i++) {
+                if ((currentLine + " " + words[i]).length <= 16) {
+                    currentLine += " " + words[i];
+                } else {
+                    lines.push(currentLine);
+                    currentLine = words[i];
+                }
+            }
+            lines.push(currentLine);
+            return lines;
+        }
+
+        // --- CHART 1: The Alchemical Ternary (Doughnut) ---
+        const ctx1 = document.getElementById('ternaryChart').getContext('2d');
+        const labels1 = ['Sulfur (Soul/Intent)', 'Mercury (Spirit/Medium)', 'Salt (Body/Hardware)'];
+        
+        new Chart(ctx1, {
+            type: 'doughnut',
+            data: {
+                labels: labels1.map(wrapLabels), // Apply wrapping
+                datasets: [{
+                    data: [33.3, 33.3, 33.3],
+                    backgroundColor: [
+                        'rgba(250, 204, 21, 0.8)', // Yellow (Sulfur)
+                        'rgba(34, 211, 238, 0.8)', // Cyan (Mercury)
+                        'rgba(244, 114, 182, 0.8)'  // Pink (Salt)
+                    ],
+                    borderColor: '#1e293b',
+                    borderWidth: 2,
+                    hoverOffset: 10
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: { color: '#f1f5f9', font: { family: 'Inter' } }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            title: function(tooltipItems) {
+                                const item = tooltipItems[0];
+                                let label = item.chart.data.labels[item.dataIndex];
+                                return Array.isArray(label) ? label.join(' ') : label;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // --- CHART 2: Feasibility Radar (Radar) ---
+        const ctx2 = document.getElementById('feasibilityChart').getContext('2d');
+        const rawLabels2 = [
+            'Quantum Entanglement', 
+            'Wave-Particle Duality', 
+            'Energy Field Theory', 
+            'Biological Entrainment', 
+            'Consciousness Interface'
+        ];
+
+        new Chart(ctx2, {
+            type: 'radar',
+            data: {
+                labels: rawLabels2.map(wrapLabels),
+                datasets: [{
+                    label: 'Scientific Feasibility',
+                    data: [90, 85, 60, 75, 40],
+                    fill: true,
+                    backgroundColor: 'rgba(34, 211, 238, 0.2)',
+                    borderColor: '#22d3ee',
+                    pointBackgroundColor: '#22d3ee',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: '#22d3ee'
+                }, {
+                    label: 'Esoteric Relevance',
+                    data: [80, 95, 100, 70, 100],
+                    fill: true,
+                    backgroundColor: 'rgba(167, 139, 250, 0.2)',
+                    borderColor: '#a78bfa',
+                    pointBackgroundColor: '#a78bfa',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: '#a78bfa'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                elements: { line: { borderWidth: 3 } },
+                scales: {
+                    r: {
+                        angleLines: { color: 'rgba(148, 163, 184, 0.2)' },
+                        grid: { color: 'rgba(148, 163, 184, 0.2)' },
+                        pointLabels: { color: '#f1f5f9', font: { size: 12 } },
+                        ticks: { display: false, backdropColor: 'transparent' }
+                    }
+                },
+                plugins: {
+                    legend: { labels: { color: '#f1f5f9' } },
+                    tooltip: {
+                        callbacks: {
+                            title: function(tooltipItems) {
+                                const item = tooltipItems[0];
+                                let label = item.chart.data.labels[item.dataIndex];
+                                return Array.isArray(label) ? label.join(' ') : label;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // --- CHART 3: Healing Modalities (Horizontal Bar) ---
+        const ctx3 = document.getElementById('modalitiesChart').getContext('2d');
+        const rawLabels3 = [
+            'Holographic Chambers', 
+            'Biorelativity', 
+            'Frequency Entrainment', 
+            'EFT / Meridian Tapping'
+        ];
+
+        new Chart(ctx3, {
+            type: 'bar',
+            data: {
+                labels: rawLabels3.map(wrapLabels),
+                datasets: [{
+                    label: 'Innovation Score',
+                    data: [95, 85, 75, 40],
+                    backgroundColor: 'rgba(34, 211, 238, 0.7)',
+                    borderColor: '#22d3ee',
+                    borderWidth: 1
+                },
+                {
+                    label: 'Implementation Complexity',
+                    data: [90, 80, 50, 20],
+                    backgroundColor: 'rgba(244, 114, 182, 0.7)',
+                    borderColor: '#f472b6',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        grid: { color: 'rgba(148, 163, 184, 0.1)' },
+                        ticks: { color: '#94a3b8' }
+                    },
+                    y: {
+                        grid: { display: false },
+                        ticks: { color: '#f1f5f9' }
+                    }
+                },
+                plugins: {
+                    legend: { labels: { color: '#f1f5f9' } },
+                    tooltip: {
+                        callbacks: {
+                            title: function(tooltipItems) {
+                                const item = tooltipItems[0];
+                                let label = item.chart.data.labels[item.dataIndex];
+                                return Array.isArray(label) ? label.join(' ') : label;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // --- CHART 4: Plotly 3D Scatter (Probability Field) ---
+        
+        // Generate random data for the cloud
+        function getRandomData(n) {
+            let x = [], y = [], z = [], color = [];
+            for (let i = 0; i < n; i++) {
+                // Create a cone-like shape
+                let r = Math.random();
+                let theta = Math.random() * 2 * Math.PI;
+                let h = Math.random() * 10;
+                
+                x.push(r * h * Math.cos(theta));
+                y.push(r * h * Math.sin(theta));
+                z.push(h);
+                color.push(h); // Color based on height (time/probability depth)
+            }
+            return {x, y, z, color};
+        }
+
+        const dataPoints = getRandomData(300);
+
+        const plotlyData = [{
+            x: dataPoints.x,
+            y: dataPoints.y,
+            z: dataPoints.z,
+            mode: 'markers',
+            marker: {
+                size: 3,
+                color: dataPoints.color,
+                colorscale: 'Bluered',
+                opacity: 0.8
+            },
+            type: 'scatter3d'
+        }];
+
+        const plotlyLayout = {
+            margin: {l: 0, r: 0, b: 0, t: 0},
+            paper_bgcolor: 'rgba(0,0,0,0)',
+            plot_bgcolor: 'rgba(0,0,0,0)',
+            scene: {
+                xaxis: {title: 'Probability X', color: '#94a3b8', gridcolor: '#334155'},
+                yaxis: {title: 'Probability Y', color: '#94a3b8', gridcolor: '#334155'},
+                zaxis: {title: 'Timeline Depth', color: '#94a3b8', gridcolor: '#334155'},
+                bgcolor: 'rgba(0,0,0,0)'
+            },
+            font: {
+                family: 'Inter, sans-serif',
+                color: '#f1f5f9'
+            },
+            showlegend: false
+        };
+
+        // Render Plotly
+        Plotly.newPlot('plotlyDiv', plotlyData, plotlyLayout, {responsive: true, displayModeBar: false});
+
+    </script>
+    
+    <!-- NO SVG used in this document. -->
+    <!-- NO Mermaid JS used in this document. -->
+    <!-- Palette: Cybernetic Neon (Slate 900 Background with Cyan/Violet/Pink Accents) -->
+    <!-- Narrative: Research Plan Visualization -> Metaphysics -> Feasibility -> Architecture -> Modalities -> Future Tech -->
+    <!-- Visualization Choices: 
+         1. Doughnut Chart (Chart.js) -> To show the 3 balanced parts of the Ternary system.
+         2. Radar Chart (Chart.js) -> To compare Esoteric vs Scientific alignment across 5 axes.
+         3. Horizontal Bar Chart (Chart.js) -> To compare efficacy/complexity of healing modalities.
+         4. 3D Scatter (Plotly.js) -> To visualize the abstract concept of a probability field (Looking Glass).
+         5. CSS/HTML Flow Diagram -> To show system architecture without SVG.
+    -->
+
+</body>
+</html>
