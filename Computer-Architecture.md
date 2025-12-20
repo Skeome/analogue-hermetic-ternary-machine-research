@@ -97,6 +97,7 @@ Now, let's meet our tiny decision-makers:
          |
         GND (Ground / 0 Volts)
         Input --- (This wire controls both faucets!)
+        
 		```
     *   **CMOS NAND Gate (2-input) - Two Faucets in a Row!**:
         To make a NAND gate, you use two NMOS transistors in a series (one after the other, like two faucets you both need to turn on for water to flow) and two PMOS transistors in parallel (side-by-side, so if either is on, water flows).
