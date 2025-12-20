@@ -87,16 +87,16 @@ Now, let's meet our tiny decision-makers:
         This beautifully simple arrangement always gives you the opposite of the input!
 
 		```
-         V_DD (High Voltage)
-          |
-         PMOS (Faucet that opens for LOW input)
-          |
-        --o-- Output (Where the decision comes out!)
-          |
-         NMOS (Faucet that opens for HIGH input)
-          |
-         GND (Ground / 0 Volts)
-         Input --- (This wire controls both faucets!)
+          V_DD (High Voltage)
+           |
+          PMOS (Faucet that opens for LOW input)
+           |
+        ---o--- Output (Where the decision comes out!)
+           |
+          NMOS (Faucet that opens for HIGH input)
+           |
+          GND (Ground / 0 Volts)
+          Input --- (This wire controls both faucets!)
 		```
     *   **CMOS NAND Gate (2-input) - Two Faucets in a Row!**:
         To make a NAND gate, you use two NMOS transistors in a series (one after the other, like two faucets you both need to turn on for water to flow) and two PMOS transistors in parallel (side-by-side, so if either is on, water flows).
