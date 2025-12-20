@@ -1,7 +1,5 @@
 # Computer Architecture: From Binary Foundations to Ternary Frontiers
 
-# Computer Architecture: From Binary Foundations to Ternary Frontiers
-
 ## Summary
 
 Imagine building a magical machine that can think, calculate, and bring incredible ideas to life! That's what computer architecture is all about: understanding the secret language and inner workings of computers, from the tiniest switches to the biggest supercomputers. This document is like a grand tour, starting with the very first whispers of a computer's "thoughts" – simple on/off switches, called **binary logic**. We'll journey through how these simple switches grew into mighty digital brains, evolving from tiny 8-bit brains to the powerful 64-bit minds we use today.
