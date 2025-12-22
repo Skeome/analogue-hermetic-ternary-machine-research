@@ -2,6 +2,8 @@
 # ANALOGUE-HERMETIC TERNARY RESEARCH CORE
 # ==========================================
 
+using Plot
+
 # 1. THE TRIT ENUM 
 @enum Trit Neg=-1 Zero=0 Pos=1
 
@@ -161,6 +163,45 @@ function multiply_trytes(word_a::Vector{Trit}, word_b::Vector{Trit})
     end
     
     return result
+end
+
+mutable struct TritMemory
+    state::Trit
+end
+
+# The Clock Pulse function
+function clock_pulse!(mem::TritMemory, input_v::Float64)
+    # The memory component has its own 'decode_analogue' logic built-in
+    new_trit = decode_analogue(input_v)
+    
+    # Update state
+    mem.state = new_trit
+    return mem.state
+end
+
+# A simple helper to increment a Tryte by 1
+function increment_tryte(word::Vector{Trit})
+    return add_trytes(word, [Pos])
+end
+
+# 1. Setup a 3-Trit Register (Max value +13)
+# We'll start at -5 ([Pos, Pos, Neg])
+current_value = [Pos, Pos, Neg]
+println("Starting Counter at: ", balanced_ternary_to_int(current_value))
+println("---------------------------------")
+
+# 2. Run for 10 "Clock Cycles"
+for cycle in 1:10
+    # Step A: Perform the math (Add 1)
+    next_value = increment_tryte(current_value)
+    
+    # Step B: Update the "Register" (State transition)
+    current_value = next_value
+    
+    # Step C: Display progress
+    int_val = balanced_ternary_to_int(current_value)
+    print("Cycle $cycle | Integer: $(rpad(int_val, 3)) | Symbols: ")
+    tPRINT(current_value)
 end
 
 println(">>> Analogue-Hermetic Environment Loaded.")
