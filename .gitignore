@@ -9,6 +9,8 @@ GEMINI.md
 .gemini/
 # Ignoring output files
 output/
-#Ignoring NDA affected Files
+# Ignoring NDA affected Files
 /Library/BOTA/
 /Library/IGF/N*
+# Ignoring text/comparison files
+*.txt
