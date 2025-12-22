@@ -1,7 +1,7 @@
 # ==========================================
 # ANALOGUE-HERMETIC TERNARY RESEARCH CORE
 # ==========================================
-
+import Pkg; Pkg.add("Plot")
 using Plot
 
 # 1. THE TRIT ENUM 
