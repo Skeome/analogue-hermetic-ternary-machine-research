@@ -137,4 +137,30 @@ function tPRINT(trits::Vector{Trit})
     println(join([symbols[t] for t in reverse(trits)]))
 end
 
+function multiply_trytes(word_a::Vector{Trit}, word_b::Vector{Trit})
+    # Start with a Zero result
+    result = [Zero]
+    
+    # Iterate through each trit of the second number
+    for (i, t_b) in enumerate(word_b)
+        # Determine the partial product for this trit
+        if t_b == Pos
+            partial = copy(word_a)
+        elseif t_b == Neg
+            partial = [tNOT(t) for t in word_a]
+        else
+            partial = [Zero]
+        end
+        
+        # Shift the partial product based on its position (i-1)
+        # Shifting in base-3 is just adding Zeros at the beginning
+        shifted_partial = vcat(fill(Zero, i-1), partial)
+        
+        # Add the shifted partial product to our running total
+        result = add_trytes(result, shifted_partial)
+    end
+    
+    return result
+end
+
 println(">>> Analogue-Hermetic Environment Loaded.")

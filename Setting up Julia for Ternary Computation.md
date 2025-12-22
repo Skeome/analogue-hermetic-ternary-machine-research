@@ -281,3 +281,78 @@ end
 my_tryte = [Pos, Pos, Neg] 
 balanced_ternary_to_int(my_tryte)
 ```
+
+
+
+```
+# Inputs: 0.55V (Barely a 'Pos') and 0.6V (Barely a 'Pos')
+# Mathematically: 1 + 1 = 2. 
+# In Ternary: Sum = -1 (Neg), Carry = 1 (Pos)
+
+voltage_a = 0.55
+voltage_b = 0.60
+
+# Step 1: Hardware-level decoding
+trit_a = decode_analogue(voltage_a)
+trit_b = decode_analogue(voltage_b)
+
+# Step 2: Logic-level addition
+s, c = tFULL_ADDER(trit_a, trit_b, Zero)
+
+println("Analogue Inputs: $voltage_a V, $voltage_b V")
+println("Decoded Trits:   $trit_a, $trit_b")
+println("-------------------------")
+println("Machine Sum:     $s")
+println("Machine Carry:   $c")
+```
+
+## Find Failure Point
+```
+# We know 1.0V + 1.0V should always result in a Carry of 'Pos'
+# Let's see how much "Voltage Drop" we can survive.
+
+println("Voltage | Decoded | Carry Result | Status")
+println("-----------------------------------------")
+
+for v in 1.0:-0.1:0.0
+    t = decode_analogue(v)
+    # We add two identical trits
+    s, c = tFULL_ADDER(t, t, Zero)
+    
+    status = (c == Pos) ? "PASS" : "FAIL"
+    
+    println("$(rpad(v, 7)) | $(rpad(t, 7)) | $(rpad(c, 12)) | $status")
+end
+```
+### Result
+```
+julia> # We know 1.0V + 1.0V should always result in a Carry of 'Pos'
+       # Let's see how much "Voltage Drop" we can survive.
+
+       println("Voltage | Decoded | Carry Result | Status")
+Voltage | Decoded | Carry Result | Status
+
+julia> println("-----------------------------------------")
+-----------------------------------------
+
+julia> for v in 1.0:-0.1:0.0
+           t = decode_analogue(v)
+           # We add two identical trits
+           s, c = tFULL_ADDER(t, t, Zero)
+           
+           status = (c == Pos) ? "PASS" : "FAIL"
+           
+           println("$(rpad(v, 7)) | $(rpad(t, 7)) | $(rpad(c, 12)) | $status")
+       end
+1.0     | Pos     | Pos          | PASS
+0.9     | Pos     | Pos          | PASS
+0.8     | Pos     | Pos          | PASS
+0.7     | Pos     | Pos          | PASS
+0.6     | Pos     | Pos          | PASS
+0.5     | Zero    | Zero         | FAIL
+0.4     | Zero    | Zero         | FAIL
+0.3     | Zero    | Zero         | FAIL
+0.2     | Zero    | Zero         | FAIL
+0.1     | Zero    | Zero         | FAIL
+0.0     | Zero    | Zero         | FAIL
+```
