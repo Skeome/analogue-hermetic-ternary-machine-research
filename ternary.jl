@@ -36,8 +36,13 @@ function tMUX(s::Trit, a::Trit, b::Trit, c::Trit)
     else return c; end
 end
 
+# Rotates values: -1 -> 0, 0 -> 1, 1 -> -1
 function tROTATE_UP(t::Trit)
     return t == Pos ? Neg : Trit(Int(t) + 1)
+end
+
+function tROTATE_DOWN(t::Trit)
+    return t == Neg ? Pos : Trit(Int(t) - 1)
 end
 
 # 3. OPERATOR OVERLOADING
@@ -46,11 +51,11 @@ import Base: +, &, |
 (Base.:&)(a::Trit, b::Trit) = tAND(a, b)
 (Base.:|)(a::Trit, b::Trit) = tOR(a, b)
 
-# 4. ARITHMETIC (Hermetic Sum & Consensus)
+# 4. ARITHMETIC (Hermetic Full Adder & Multi-Trit)
 function tSUM(a::Trit, b::Trit)
     s = Int(a) + Int(b)
-    if s > 1; return Neg
-    elseif s < -1; return Pos
+    if s > 1; return Neg   # 1 + 1 = 2 -> (1, -1)
+    elseif s < -1; return Pos # -1 + -1 = -2 -> (-1, 1)
     else return Trit(s); end
 end
 
@@ -61,6 +66,30 @@ function tCONSENSUS(a::Trit, b::Trit)
     else return Zero; end
 end
 
+function tFULL_ADDER(a::Trit, b::Trit, cin::Trit)
+    s1 = tSUM(a, b)
+    c1 = tCONSENSUS(a, b)
+    sum_final = tSUM(s1, cin)
+    c2 = tCONSENSUS(s1, cin)
+    cout = tOR(c1, c2) # Standard Hermetic carry logic
+    return sum_final, cout
+end
+
+function add_trytes(word_a::Vector{Trit}, word_b::Vector{Trit})
+    len = max(length(word_a), length(word_b))
+    a = vcat(word_a, fill(Zero, len - length(word_a)))
+    b = vcat(word_b, fill(Zero, len - length(word_b)))
+    
+    result = Trit[]
+    carry = Zero
+    for i in 1:len
+        s, carry = tFULL_ADDER(a[i], b[i], carry)
+        push!(result, s)
+    end
+    if carry != Zero; push!(result, carry); end
+    return result
+end
+
 # 5. ANALOGUE INTERFACE
 function decode_analogue(voltage::Float64)
     if voltage > 0.5; return Pos
@@ -68,7 +97,7 @@ function decode_analogue(voltage::Float64)
     else return Zero; end
 end
 
-# 6. MEMORY & DATA
+# 6. MEMORY, UTILS & FORMATTING
 mutable struct TritRegister
     value::Trit
 end
@@ -81,4 +110,10 @@ function balanced_ternary_to_int(trits::Vector{Trit})
     return total
 end
 
-println(">>> Ternary Environment Loaded.")
+# Pretty printer: displays as +, 0, - (MSB on the left)
+function tPRINT(trits::Vector{Trit})
+    symbols = Dict(Pos => "+", Zero => "0", Neg => "-")
+    println(join([symbols[t] for t in reverse(trits)]))
+end
+
+println(">>> Analogue-Hermetic Environment Loaded.")
