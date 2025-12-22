@@ -1,8 +1,8 @@
 # ==========================================
 # ANALOGUE-HERMETIC TERNARY RESEARCH CORE
 # ==========================================
-import Pkg; Pkg.add("Plot")
-using Plot
+import Pkg; Pkg.add("Plots")
+using Plots
 
 # 1. THE TRIT ENUM 
 @enum Trit Neg=-1 Zero=0 Pos=1
