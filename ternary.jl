@@ -2,10 +2,10 @@
 # ANALOGUE-HERMETIC TERNARY RESEARCH CORE
 # ==========================================
 
-# 1. THE TRIT ENUM [cite: 1]
+# 1. THE TRIT ENUM 
 @enum Trit Neg=-1 Zero=0 Pos=1
 
-# 2. MNEMONIC LOGIC GATES [cite: 1, 2, 4]
+# 2. MNEMONIC LOGIC GATES 
 function tNOT(t::Trit)
     return Trit(-Int(t))
 end
@@ -18,6 +18,14 @@ function tOR(a::Trit, b::Trit)
     return Trit(max(Int(a), Int(b)))
 end
 
+function tNAND(a::Trit, b::Trit)
+    return tNOT(tAND(a, b))
+end
+
+function tNOR(a::Trit, b::Trit)
+    return tNOT(tOR(a, b))
+end
+
 function tEQ(a::Trit, b::Trit)
     return a == b ? Pos : Neg
 end
@@ -28,7 +36,7 @@ function tMUX(s::Trit, a::Trit, b::Trit, c::Trit)
     else return c; end
 end
 
-# Rotates values: -1 -> 0, 0 -> 1, 1 -> -1 [cite: 5]
+# Rotates values: -1 -> 0, 0 -> 1, 1 -> -1 
 function tROTATE_UP(t::Trit)
     return t == Pos ? Neg : Trit(Int(t) + 1)
 end
@@ -37,13 +45,13 @@ function tROTATE_DOWN(t::Trit)
     return t == Neg ? Pos : Trit(Int(t) - 1)
 end
 
-# 3. OPERATOR OVERLOADING [cite: 6]
+# 3. OPERATOR OVERLOADING 
 import Base: +, &, |
 (Base.:+)(a::Trit, b::Trit) = tSUM(a, b)
 (Base.:&)(a::Trit, b::Trit) = tAND(a, b)
 (Base.:|)(a::Trit, b::Trit) = tOR(a, b)
 
-# 4. ARITHMETIC (Hermetic Full Adder & Multi-Trit) [cite: 7, 9]
+# 4. ARITHMETIC (Hermetic Full Adder & Multi-Trit)
 function tSUM(a::Trit, b::Trit)
     s = Int(a) + Int(b)
     if s == 2 return Neg
@@ -58,11 +66,11 @@ function tCONSENSUS(a::Trit, b::Trit)
     else return Zero end
 end
 
-# Total Sum method for robust carry propagation
+# Robust Full Adder using Total Integer Sum
 function tFULL_ADDER(a::Trit, b::Trit, cin::Trit)
     total = Int(a) + Int(b) + Int(cin)
     
-    # Calculate Sum (The remainder when divided by 3, balanced)
+    # Calculate Sum (Remainder base 3, balanced)
     if total == 3 || total == 0 || total == -3
         s_out = Zero
     elseif total == 1 || total == -2
@@ -71,7 +79,7 @@ function tFULL_ADDER(a::Trit, b::Trit, cin::Trit)
         s_out = Neg
     end
     
-    # Calculate Carry (The "3s" place)
+    # Calculate Carry (The 3s place)
     if total > 1
         c_out = Pos
     elseif total < -1
@@ -104,14 +112,14 @@ function sub_trytes(word_a::Vector{Trit}, word_b::Vector{Trit})
     return add_trytes(word_a, negative_b)
 end
 
-# 5. ANALOGUE INTERFACE [cite: 11]
+# 5. ANALOGUE INTERFACE 
 function decode_analogue(voltage::Float64)
     if voltage > 0.5; return Pos
     elseif voltage < -0.5; return Neg
     else return Zero; end
 end
 
-# 6. MEMORY & DATA FORMATTING
+# 6. MEMORY & DATA FORMATTING 
 mutable struct TritRegister
     value::Trit
 end
