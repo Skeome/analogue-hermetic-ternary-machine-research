@@ -1,7 +1,8 @@
 # ==========================================
 # ANALOGUE-HERMETIC TERNARY RESEARCH CORE
 # ==========================================
-import Pkg; Pkg.add("Plots")
+
+
 using Plots
 
 # 1. THE TRIT ENUM 
@@ -192,6 +193,7 @@ println("---------------------------------")
 
 # 2. Run for 10 "Clock Cycles"
 for cycle in 1:10
+    global current_value
     # Step A: Perform the math (Add 1)
     next_value = increment_tryte(current_value)
     
