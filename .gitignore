@@ -4,8 +4,9 @@ __pycache__/
 venv/
 # Ignoring Obsidian configuration and data
 .obsidian/
-# Ignoring GEMINI.md (Agent Context)
+# Ignoring GEMINI.md (Agent Context) and settings
 GEMINI.md
+.gemini/
 # Ignoring output files
 output/
 #Ignoring NDA affected Files
