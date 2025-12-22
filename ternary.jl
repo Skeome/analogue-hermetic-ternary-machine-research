@@ -2,10 +2,10 @@
 # ANALOGUE-HERMETIC TERNARY RESEARCH CORE
 # ==========================================
 
-# 1. THE TRIT ENUM
+# 1. THE TRIT ENUM [cite: 1]
 @enum Trit Neg=-1 Zero=0 Pos=1
 
-# 2. MNEMONIC LOGIC GATES (Standardized)
+# 2. MNEMONIC LOGIC GATES [cite: 1, 2, 4]
 function tNOT(t::Trit)
     return Trit(-Int(t))
 end
@@ -18,14 +18,6 @@ function tOR(a::Trit, b::Trit)
     return Trit(max(Int(a), Int(b)))
 end
 
-function tNAND(a::Trit, b::Trit)
-    return tNOT(tAND(a, b))
-end
-
-function tNOR(a::Trit, b::Trit)
-    return tNOT(tOR(a, b))
-end
-
 function tEQ(a::Trit, b::Trit)
     return a == b ? Pos : Neg
 end
@@ -36,7 +28,7 @@ function tMUX(s::Trit, a::Trit, b::Trit, c::Trit)
     else return c; end
 end
 
-# Rotates values: -1 -> 0, 0 -> 1, 1 -> -1
+# Rotates values: -1 -> 0, 0 -> 1, 1 -> -1 [cite: 5]
 function tROTATE_UP(t::Trit)
     return t == Pos ? Neg : Trit(Int(t) + 1)
 end
@@ -45,34 +37,50 @@ function tROTATE_DOWN(t::Trit)
     return t == Neg ? Pos : Trit(Int(t) - 1)
 end
 
-# 3. OPERATOR OVERLOADING
+# 3. OPERATOR OVERLOADING [cite: 6]
 import Base: +, &, |
 (Base.:+)(a::Trit, b::Trit) = tSUM(a, b)
 (Base.:&)(a::Trit, b::Trit) = tAND(a, b)
 (Base.:|)(a::Trit, b::Trit) = tOR(a, b)
 
-# 4. ARITHMETIC (Hermetic Full Adder & Multi-Trit)
+# 4. ARITHMETIC (Hermetic Full Adder & Multi-Trit) [cite: 7, 9]
 function tSUM(a::Trit, b::Trit)
     s = Int(a) + Int(b)
-    if s > 1; return Neg   # 1 + 1 = 2 -> (1, -1)
-    elseif s < -1; return Pos # -1 + -1 = -2 -> (-1, 1)
-    else return Trit(s); end
+    if s == 2 return Neg
+    elseif s == -2 return Pos
+    else return Trit(s) end
 end
 
 function tCONSENSUS(a::Trit, b::Trit)
     s = Int(a) + Int(b)
-    if s > 1; return Pos
-    elseif s < -1; return Neg
-    else return Zero; end
+    if s > 1 return Pos
+    elseif s < -1 return Neg
+    else return Zero end
 end
 
+# Total Sum method for robust carry propagation
 function tFULL_ADDER(a::Trit, b::Trit, cin::Trit)
-    s1 = tSUM(a, b)
-    c1 = tCONSENSUS(a, b)
-    sum_final = tSUM(s1, cin)
-    c2 = tCONSENSUS(s1, cin)
-    cout = tOR(c1, c2) # Standard Hermetic carry logic
-    return sum_final, cout
+    total = Int(a) + Int(b) + Int(cin)
+    
+    # Calculate Sum (The remainder when divided by 3, balanced)
+    if total == 3 || total == 0 || total == -3
+        s_out = Zero
+    elseif total == 1 || total == -2
+        s_out = Pos
+    else # total == -1 || total == 2
+        s_out = Neg
+    end
+    
+    # Calculate Carry (The "3s" place)
+    if total > 1
+        c_out = Pos
+    elseif total < -1
+        c_out = Neg
+    else
+        c_out = Zero
+    end
+    
+    return s_out, c_out
 end
 
 function add_trytes(word_a::Vector{Trit}, word_b::Vector{Trit})
@@ -90,14 +98,20 @@ function add_trytes(word_a::Vector{Trit}, word_b::Vector{Trit})
     return result
 end
 
-# 5. ANALOGUE INTERFACE
+# Subtraction by negation (A + (-B))
+function sub_trytes(word_a::Vector{Trit}, word_b::Vector{Trit})
+    negative_b = [tNOT(t) for t in word_b]
+    return add_trytes(word_a, negative_b)
+end
+
+# 5. ANALOGUE INTERFACE [cite: 11]
 function decode_analogue(voltage::Float64)
     if voltage > 0.5; return Pos
     elseif voltage < -0.5; return Neg
     else return Zero; end
 end
 
-# 6. MEMORY, UTILS & FORMATTING
+# 6. MEMORY & DATA FORMATTING
 mutable struct TritRegister
     value::Trit
 end
@@ -110,7 +124,6 @@ function balanced_ternary_to_int(trits::Vector{Trit})
     return total
 end
 
-# Pretty printer: displays as +, 0, - (MSB on the left)
 function tPRINT(trits::Vector{Trit})
     symbols = Dict(Pos => "+", Zero => "0", Neg => "-")
     println(join([symbols[t] for t in reverse(trits)]))
