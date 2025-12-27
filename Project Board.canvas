@@ -9,7 +9,7 @@
 		{"id":"db168c197ff56ca4","type":"file","file":"Experimental-Protocol.md","x":-3120,"y":-1280,"width":1503,"height":1325},
 		{"id":"9b18abdd6aea287c","type":"file","file":"Computational-Model.md","x":1040,"y":-1280,"width":1503,"height":1325},
 		{"id":"492dfeb7b369e8f7","type":"file","file":"Computer-Architecture.md","x":-3120,"y":1120,"width":5663,"height":560},
-		{"id":"c98c3ddf9bde60d2","x":1040,"y":-2179,"width":1503,"height":799,"type":"file","file":"2025-12-22.png"}
+		{"id":"c98c3ddf9bde60d2","type":"file","file":"2025-12-22.png","x":1040,"y":-2179,"width":1503,"height":799}
 	],
 	"edges":[
 		{"id":"3ee2b56f5e867554","fromNode":"c1676c7b0bf602d9","fromSide":"bottom","toNode":"490d8df5cdcb425c","toSide":"top"},
